@@ -16,9 +16,9 @@ class Input(BaseModel):
 class FunnelInput(Input):
     spend: Decimal = Field(ge=0, max_digits=18, decimal_places=2)
     revenue: Decimal = Field(ge=0, max_digits=18, decimal_places=2)
-    visitors: int = Field(ge=0, strict=True)
-    leads: int = Field(ge=0, strict=True)
-    customers: int = Field(ge=0, strict=True)
+    visitors: int = Field(ge=0, le=1_000_000_000_000, strict=True)
+    leads: int = Field(ge=0, le=1_000_000_000_000, strict=True)
+    customers: int = Field(ge=0, le=1_000_000_000_000, strict=True)
     currency: str = Field(pattern=r"^[A-Z]{3}$")
     cohort_confirmed: bool
 
@@ -157,7 +157,7 @@ def reconcile(p: ReconcileInput) -> dict:
 
 class DesignInput(Input):
     baseline_rate: float = Field(gt=0, lt=1)
-    absolute_mde: float = Field(gt=0, lt=1)
+    absolute_mde: float = Field(ge=0.000001, lt=1)
     alpha: float = Field(default=0.05, ge=0.001, le=0.1)
     power: float = Field(default=0.8, ge=0.5, le=0.99)
 
@@ -197,10 +197,10 @@ def design_experiment(p: DesignInput) -> dict:
 
 
 class ExperimentInput(Input):
-    control_n: int = Field(gt=0, strict=True)
-    control_conversions: int = Field(ge=0, strict=True)
-    treatment_n: int = Field(gt=0, strict=True)
-    treatment_conversions: int = Field(ge=0, strict=True)
+    control_n: int = Field(gt=0, le=1_000_000_000_000, strict=True)
+    control_conversions: int = Field(ge=0, le=1_000_000_000_000, strict=True)
+    treatment_n: int = Field(gt=0, le=1_000_000_000_000, strict=True)
+    treatment_conversions: int = Field(ge=0, le=1_000_000_000_000, strict=True)
     expected_treatment_share: float = Field(default=0.5, gt=0, lt=1)
     alpha: float = Field(default=0.05, ge=0.001, le=0.1)
     fixed_horizon_complete: bool

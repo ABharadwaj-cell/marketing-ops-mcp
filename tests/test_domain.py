@@ -128,3 +128,16 @@ def test_utm_preserves_query_and_requires_replacement():
     p.url = "https://example.com/?utm_source=old"
     with pytest.raises(ValueError):
         build_utm(p)
+
+
+def test_numerically_unstable_design_rejected():
+    with pytest.raises(ValidationError):
+        DesignInput(baseline_rate=0.1, absolute_mde=1e-300)
+    with pytest.raises(ValidationError):
+        ExperimentInput(
+            control_n=10**1000,
+            control_conversions=0,
+            treatment_n=100,
+            treatment_conversions=0,
+            fixed_horizon_complete=True,
+        )
