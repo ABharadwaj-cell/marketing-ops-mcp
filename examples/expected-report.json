@@ -1,0 +1,42 @@
+{
+  "kind": "funnel_metrics",
+  "currency": "USD",
+  "metrics": [
+    {
+      "metric": "visitor_to_lead",
+      "value": 0.03,
+      "definition": "leads / visitors"
+    },
+    {
+      "metric": "lead_to_customer",
+      "value": 0.06666666666666667,
+      "definition": "customers / leads"
+    },
+    {
+      "metric": "cost_per_lead",
+      "value": 4.0,
+      "definition": "supplied spend / leads"
+    },
+    {
+      "metric": "media_cost_per_customer",
+      "value": 60.0,
+      "definition": "supplied spend / customers; not fully loaded CAC"
+    },
+    {
+      "metric": "roas",
+      "value": 5.0,
+      "definition": "attributed revenue / supplied spend"
+    },
+    {
+      "metric": "average_revenue_per_customer",
+      "value": 300.0,
+      "definition": "revenue / customers"
+    }
+  ],
+  "limitations": [
+    "Null means undefined because the denominator is zero.",
+    "ROAS is not profit, incrementality or ROI.",
+    "Fully loaded CAC requires all acquisition costs; media spend alone is insufficient.",
+    "No attribution or causal inference is performed."
+  ]
+}

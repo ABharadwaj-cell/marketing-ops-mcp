@@ -1,0 +1,9 @@
+{
+  "spend": "1200.00",
+  "revenue": "6000.00",
+  "visitors": 10000,
+  "leads": 300,
+  "customers": 20,
+  "currency": "USD",
+  "cohort_confirmed": true
+}
