@@ -130,6 +130,31 @@ def test_utm_preserves_query_and_requires_replacement():
         build_utm(p)
 
 
+
+@pytest.mark.parametrize(
+    "url",
+    [
+        "https://example.com:notaport/landing",
+        "https://example.com:65536/landing",
+        "https://example.com:0/landing",
+    ],
+)
+def test_utm_rejects_invalid_ports(url):
+    p = UTMInput(url=url, source="newsletter", medium="email", campaign="launch")
+    with pytest.raises(ValueError, match="port"):
+        build_utm(p)
+
+
+def test_utm_preserves_valid_explicit_port():
+    p = UTMInput(
+        url="https://example.com:8443/landing?ref=partner",
+        source="newsletter",
+        medium="email",
+        campaign="launch",
+    )
+    assert build_utm(p)["url"].startswith("https://example.com:8443/landing?ref=partner&")
+
+
 def test_numerically_unstable_design_rejected():
     with pytest.raises(ValidationError):
         DesignInput(baseline_rate=0.1, absolute_mde=1e-300)
