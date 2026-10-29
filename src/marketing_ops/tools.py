@@ -291,6 +291,12 @@ def build_utm(p: UTMInput) -> dict:
         or parts.password
     ):
         raise ValueError("Absolute HTTP(S) URL without credentials required")
+    try:
+        port = parts.port
+    except ValueError as exc:
+        raise ValueError("URL contains an invalid port") from exc
+    if port == 0:
+        raise ValueError("URL port must be between 1 and 65535")
     query = parse_qsl(parts.query, keep_blank_values=True)
     existing = [k for k, v in query if k.lower().startswith("utm_")]
     if existing and not p.replace_existing:
