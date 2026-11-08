@@ -22,6 +22,13 @@ def test_csv_formula_guard(value):
     assert csv_cell(value).startswith("'")
 
 
+@pytest.mark.parametrize("value", ["\ufeff=1+1", " \ufeff+SUM(A1)", "\ufeff\t-1", "\ufeff@cmd"])
+def test_csv_formula_guard_with_bom(value):
+    assert csv_cell(value).startswith("\'")
+    exported = deliverables({"kind": "x", "findings": [{"value": value}]})["report.csv"]
+    assert "\'" + value in exported
+
+
 async def test_mcp_schema_and_validation():
     server = build_server()
     tools = await server.list_tools()

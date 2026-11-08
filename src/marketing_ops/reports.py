@@ -4,12 +4,13 @@ import csv
 import html
 import io
 import json
+import re
 from pathlib import Path
 
 
 def csv_cell(value):
     text = str(value if value is not None else "")
-    if text.lstrip().startswith(("=", "+", "-", "@")) or text.startswith(("\t", "\r", "\n")):
+    if re.sub(r"^[\s\ufeff]+", "", text).startswith(("=", "+", "-", "@")) or text.startswith(("\t", "\r", "\n")):
         return "'" + text
     return text
 
