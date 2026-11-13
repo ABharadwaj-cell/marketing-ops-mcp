@@ -36,12 +36,12 @@ The command creates `report.json`, `report.csv`, `report.md` and an escaped `rep
 ```sh
 marketing-ops-mcp serve
 # Local HTTP endpoint: http://127.0.0.1:8765/mcp
-marketing-ops-mcp serve --transport streamable-http
+# Generate and export a random secret (keep it private):\nexport MARKETING_OPS_HTTP_TOKEN="$(python -c 'import secrets; print(secrets.token_urlsafe(48))')"\nmarketing-ops-mcp serve --transport streamable-http
 # Requires OPENAI_API_KEY and OPENAI_MODEL in your environment:
 marketing-ops-mcp agent examples/task.txt --out output/agent
 ```
 
-See [ChatGPT connection instructions](docs/CHATGPT.md). A ChatGPT connection needs a reachable endpoint or supported tunnel; this repository is not already hosted or connected to your account. The local HTTP service has no application authentication and must not be exposed directly. Deterministic MCP tools need no OpenAI key. The agent runner is optional and makes billable API calls.
+See [ChatGPT connection instructions](docs/CHATGPT.md). A ChatGPT connection needs a reachable endpoint or supported tunnel; this repository is not already hosted or connected to your account. HTTP now requires a bearer token in the Authorization header and fails closed without MARKETING_OPS_HTTP_TOKEN (minimum 32 characters). It remains loopback-only and must not be exposed directly; use a TLS gateway with access controls for remote clients. Deterministic MCP tools need no OpenAI key. The agent runner is optional and makes billable API calls.
 
 ## Repository layout
 
