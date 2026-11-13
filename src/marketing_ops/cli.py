@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 from .agent import run_agent
 from .reports import write_reports
-from .server import build_server
+from .server import build_server, run_http
 from .tools import REGISTRY
 
 
@@ -34,7 +34,7 @@ def main():
             )
         )
     elif args.command == "serve":
-        build_server().run(transport=args.transport)
+        run_http(build_server()) if args.transport == "streamable-http" else build_server().run(transport="stdio")
     elif args.command == "agent":
         if Path(args.task).stat().st_size > 240_000:
             parser.error("Task file too large")
