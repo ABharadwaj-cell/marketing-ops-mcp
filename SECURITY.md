@@ -15,7 +15,7 @@ Source excerpts, HTML and model output are untrusted data, never instructions.
 The agent has a bounded tool loop; human review is required before using its advice.
 
 The MCP server defaults to local stdio. HTTP binds to 127.0.0.1 and has DNS-rebinding
-protection. It has **no application authentication**. Do not expose it directly to
+protection. HTTP requires MARKETING_OPS_HTTP_TOKEN (at least 32 random characters), checked as an Authorization: Bearer token before MCP dispatch; without it, HTTP refuses to start. Stdio remains available without an HTTP token. Do not expose HTTP directly to
 the internet. A production ChatGPT integration needs a TLS gateway, authentication,
 rate/body limits, tenant isolation, and retention controls. These are deployment
 requirements, not features claimed by this repository.
