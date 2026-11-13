@@ -10,9 +10,9 @@ No API key is needed for deterministic MCP tools.
 
 ## ChatGPT custom MCP connection
 
-Run `marketing-ops-mcp serve --transport streamable-http`. The endpoint is
+Set a random secret with `export MARKETING_OPS_HTTP_TOKEN="$(python -c 'import secrets; print(secrets.token_urlsafe(48))')"`, then run `marketing-ops-mcp serve --transport streamable-http`. Send `Authorization: Bearer <your secret>` with each HTTP request. Without the secret, HTTP refuses to start. The endpoint is
 `http://127.0.0.1:8765/mcp`, accessible locally only. For a short synthetic-data demo,
-use the supported ChatGPT tunnel workflow. For a production connection, deploy behind
+use a tunnel that securely forwards the Authorization header and terminates TLS. Do not publish the secret in the repository. ChatGPT clients without custom bearer-header support require a compatible authenticated gateway. For a production connection, deploy behind
 an authenticated TLS gateway with rate limits and tenant controls. This repository
 does not implement an OAuth authorization server and is not production-hosted for you.
 In ChatGPT's custom MCP connection flow, supply your reachable endpoint and configure
