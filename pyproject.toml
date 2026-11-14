@@ -4,11 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "marketing-ops-mcp"
-version = "0.1.1"
+version = "0.1.2"
 description = "Evidence-first marketing tools for ChatGPT and OpenAI agents"
 readme = "README.md"
 requires-python = ">=3.11"
-license = "LicenseRef-PolyForm-Perimeter-1.0.0"
+license = "LicenseRef-PolyForm-Noncommercial-1.0.0"
 authors = [{name = "Akhilesh Bharadwaj"}]
 dependencies = ["mcp==1.30.0", "openai==2.54.0", "pydantic==2.14.3", "beautifulsoup4==4.15.0"]
 
