@@ -1,9 +1,9 @@
 # Marketing Ops MCP
 
 [![Tests](https://github.com/ABharadwaj-cell/marketing-ops-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/ABharadwaj-cell/marketing-ops-mcp/actions/workflows/ci.yml)
-[![License: PolyForm Perimeter 1.0.0](https://img.shields.io/badge/License-PolyForm%20Perimeter-blue.svg)](LICENSE)
+[![License: PolyForm Noncommercial 1.0.0](https://img.shields.io/badge/License-PolyForm%20Noncommercial-blue.svg)](LICENSE)
 
-Original Python tools for evidence-first marketing work through **ChatGPT-compatible MCP**, **OpenAI Responses agents**, or a local CLI. Version 0.1.1 is an independently implemented alpha release; it is not a fork, a renamed Claude project, or a claim of feature parity with larger reference projects.
+Original Python tools for evidence-first marketing work through **ChatGPT-compatible MCP**, **OpenAI Responses agents**, or a local CLI. Version 0.1.2 is an independently implemented alpha release; it is not a fork, a renamed Claude project, or a claim of feature parity with larger reference projects.
 
 ## Working capabilities
 
@@ -61,4 +61,4 @@ Tests cover important numerical, validation and trust boundaries, including a re
 
 This release prioritizes inspectable behavior over code volume. It does not claim to equal the references' line counts or broad feature sets. [Scope and research](docs/RESEARCH.md) explains the conceptual inspiration and remaining gaps. Source implementation was written independently; reference README descriptions informed the problem selection.
 
-Read [SECURITY.md](SECURITY.md) before deployment. Contributions follow [CONTRIBUTING.md](CONTRIBUTING.md) and the [community conduct policy](CODE_OF_CONDUCT.md). Current release: [PolyForm Perimeter 1.0.0](LICENSE) (source-available, restrictions on competing products). The original v0.1.0 release remains available under the [historical MIT licence](LICENSE-MIT-0.1.0). See [licensing history and commercial-use guidance](docs/LICENSING.md).
+Read [SECURITY.md](SECURITY.md) before deployment. Contributions follow [CONTRIBUTING.md](CONTRIBUTING.md) and the [community conduct policy](CODE_OF_CONDUCT.md). Current release: [PolyForm Noncommercial 1.0.0](LICENSE) (source-available; commercial use generally requires separate written approval). Historic release grants remain intact: [MIT v0.1.0](LICENSE-MIT-0.1.0), [PolyForm Perimeter v0.1.1](LICENSE-POLYFORM-PERIMETER-0.1.1). See [licensing history](docs/LICENSING.md) and [community/commercial policy](docs/COMMERCIAL_LICENSING_AND_CONTRIBUTIONS.md).
