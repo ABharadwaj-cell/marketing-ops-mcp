@@ -18,14 +18,18 @@ class BearerAuthASGI:
         self.token = ("Bearer " + token).encode("utf-8")
 
     async def __call__(self, scope, receive, send):
+        if scope["type"] == "websocket":
+            # This server exposes HTTP MCP only; never bypass authentication via upgrades.
+            await send({"type": "websocket.close", "code": 1008})
+            return
         if scope["type"] != "http":
             await self.app(scope, receive, send)
             return
-        supplied = next(
-            (value for key, value in scope.get("headers", []) if key.lower() == b"authorization"),
-            b"",
-        )
-        if not hmac.compare_digest(supplied, self.token):
+        authorization = [
+            value for key, value in scope.get("headers", []) if key.lower() == b"authorization"
+        ]
+        # Reject ambiguous duplicate headers rather than trusting whichever a proxy chooses.
+        if len(authorization) != 1 or not hmac.compare_digest(authorization[0], self.token):
             await send({
                 "type": "http.response.start",
                 "status": 401,
